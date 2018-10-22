@@ -103,11 +103,10 @@ def ajax_upload(request, folder_id=None):
             if FileSubClass.matches_file_type(filename, upload, request):
                 FileForm = modelform_factory(
                     model=FileSubClass,
-                    fields=('original_filename', 'owner', 'file')
+                    fields=('original_filename', 'file')
                 )
                 break
-        uploadform = FileForm({'original_filename': filename,
-                               'owner': request.user.pk},
+        uploadform = FileForm({'original_filename': filename},
                               {'file': upload})
         if uploadform.is_valid():
             file_obj = uploadform.save(commit=False)
